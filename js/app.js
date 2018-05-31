@@ -65,7 +65,14 @@ $( document ).ready(function() {
             });
         }
     }
-
+  
+    function match() {
+       cards.forEach(function(card, i) {
+           $(card).removeClass('open show');
+           $(card).addClass('match');
+       });
+       cards = [];
+   }
 });
 
 
