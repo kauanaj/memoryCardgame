@@ -44,7 +44,27 @@ $( document ).ready(function() {
     function displayCard(evt) {
         $(evt.target).addClass('open show');
     }
-
+    
+    function compare() {
+        if(cards.length > 1) {
+            var prv, cur = null;
+            cards.forEach(function(card, i) {
+                cur = card.children[0].className;
+                if( prv !== null ) {
+                    if( prv === cur ) {
+                        match();
+                    } else {
+                        setTimeout(
+                            function(){
+                                unmatch();
+                            }, 500);
+                        ;
+                    }
+                }
+                prv = card.children[0].className;
+            });
+        }
+    }
 
 });
 
