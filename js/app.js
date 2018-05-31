@@ -11,33 +11,56 @@
  */
 
 // Shuffle function from http://stackoverflow.com/a/2450976
-function shuffle(array) {
-    var currentIndex = array.length, temporaryValue, randomIndex;
 
-    while (currentIndex !== 0) {
-        randomIndex = Math.floor(Math.random() * currentIndex);
-        currentIndex -= 1;
-        temporaryValue = array[currentIndex];
-        array[currentIndex] = array[randomIndex];
-        array[randomIndex] = temporaryValue;
+$( document ).ready(function() {
+    var cards = [];
+    
+    $(".card").each(function(i, el) {
+        el.addEventListener('click', function(ev){
+            displayCard(ev);
+            cards.push(el);
+            compare();
+        });
+    });
+
+    function shuffle(array) {
+        var currentIndex = array.length, temporaryValue, randomIndex;
+
+        while (currentIndex !== 0) {
+            randomIndex = Math.floor(Math.random() * currentIndex);
+            currentIndex -= 1;
+            temporaryValue = array[currentIndex];
+            array[currentIndex] = array[randomIndex];
+            array[randomIndex] = temporaryValue;
+        }
+
+        return array;
     }
 
-    return array;
-}
+    $('.score-panel').on('click','.begin', function(evt){
+            $('li').removeClass('open show');
+    });
 
-$('.score-panel').on('click','.begin', function(evt){
-        $('li').removeClass('open show');
-})
+    function displayCard(evt) {
+        $(evt.target).addClass('open show');
+    }
 
-$('.deck').on('click','.card', function(evt){
-        displayCard(evt);
-})
 
-function displayCard(evt) {
-    $(evt.target).addClass('open show');
-}
+});
+
 
 /*
+
+cards = [ {} ];
+
+card := {
+    "class": "fa fa-diamond"
+}
+
+doDeck() {
+    document.createElemt
+}
+
  * set up the event listener for a card. If a card is clicked:
  *  - display the card's symbol (put this functionality in another function that you call from this one)
  *  - add the card to a *list* of "open" cards (put this functionality in another function that you call from this one)
