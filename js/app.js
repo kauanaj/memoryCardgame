@@ -73,6 +73,13 @@ $( document ).ready(function() {
        });
        cards = [];
    }
+    
+    function unmatch() {
+       cards.forEach(function(card, i) {
+           $(card).removeClass('open show');
+       });
+       cards = [];
+   }
 });
 
 
