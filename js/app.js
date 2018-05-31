@@ -11,10 +11,6 @@
  */
 
 // Shuffle function from http://stackoverflow.com/a/2450976
-$('.score-panel').on('click','.begin', function(evt){
-        $('li').removeClass('open show');
-})
-
 function shuffle(array) {
     var currentIndex = array.length, temporaryValue, randomIndex;
 
@@ -28,6 +24,19 @@ function shuffle(array) {
 
     return array;
 }
+
+$('.score-panel').on('click','.begin', function(evt){
+        $('li').removeClass('open show');
+})
+
+$('.deck').on('click','.card', function(evt){
+        displayCard(evt);
+})
+
+function displayCard(evt) {
+    $(evt.target).addClass('open show');
+}
+
 /*
  * set up the event listener for a card. If a card is clicked:
  *  - display the card's symbol (put this functionality in another function that you call from this one)
