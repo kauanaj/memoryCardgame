@@ -14,7 +14,8 @@
 
 $( document ).ready(function() {
     var cards = [];
-    
+
+      
     $(".card").each(function(i, el) {
         el.addEventListener('click', function(ev){
             displayCard(ev);
@@ -23,23 +24,23 @@ $( document ).ready(function() {
         });
     });
 
-    function shuffle(array) {
-        var currentIndex = array.length, temporaryValue, randomIndex;
+    $('.score-panel').on('click', '.restart', function(ev){
+        shuffle(ev);    
+    })
+    
+    function shuffle(cards) {
+        var currentIndex = cards.length, temporaryValue, randomIndex;
 
         while (currentIndex !== 0) {
             randomIndex = Math.floor(Math.random() * currentIndex);
             currentIndex -= 1;
-            temporaryValue = array[currentIndex];
-            array[currentIndex] = array[randomIndex];
-            array[randomIndex] = temporaryValue;
+            temporaryValue = cards[currentIndex];
+            cards[currentIndex] = cards[randomIndex];
+            cards[randomIndex] = temporaryValue;
         }
 
-        return array;
+        return cards;
     }
-
-    $('.score-panel').on('click','.begin', function(evt){
-            $('li').removeClass('open show');
-    });
 
     function displayCard(evt) {
         $(evt.target).addClass('open show');
@@ -80,6 +81,7 @@ $( document ).ready(function() {
        });
        cards = [];
    }
+              
 });
 
 
