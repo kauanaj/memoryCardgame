@@ -13,9 +13,10 @@
 // Shuffle function from http://stackoverflow.com/a/2450976
 
 $( document ).ready(function() {
+    setTimeout( function(){
+    $('li').removeClass('open show');
     var cards = [];
-
-      
+        
     $(".card").each(function(i, el) {
         el.addEventListener('click', function(ev){
             displayCard(ev);
@@ -81,7 +82,7 @@ $( document ).ready(function() {
        });
        cards = [];
    }
-              
+  },2000);               
 });
 
 
