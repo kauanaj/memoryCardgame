@@ -13,7 +13,7 @@
 // Shuffle function from http://stackoverflow.com/a/2450976
 
 $( document ).ready(function() {
-    var erro = 0, win = 0, cards = [];
+    var  cards = [];
 
     setTimeout(function() {
         $('li').removeClass('open show');    
@@ -24,13 +24,17 @@ $( document ).ready(function() {
             displayCard(ev);
             cards.push(el);
             compare();
-            console.log(win, erro);
+            console.log(erro);
         });
     });
 
     $('.restart').on('click', '.fa-repeat', function(ev){
         shuffle(cards);    
     })
+    
+    function  moves(){
+            
+    }
     
     function shuffle(cards) {
         var currentIndex = cards.length, temporaryValue, randomIndex;
@@ -77,9 +81,8 @@ $( document ).ready(function() {
            $(card).addClass('match');
          });
        cards = [];
-       erro = erro+1;
+       move = move+1;
        win = win+1;
-       console.log('match');
    }
     
     function unmatch() {
@@ -87,8 +90,7 @@ $( document ).ready(function() {
            $(card).removeClass('open show');
        });
        cards = [];
-       erro = erro+1;
-        console.log('unmatch');
+       move = move+1;
    }             
 });
 
