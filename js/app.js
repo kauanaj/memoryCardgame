@@ -13,20 +13,23 @@
 // Shuffle function from http://stackoverflow.com/a/2450976
 
 $( document ).ready(function() {
-    setTimeout( function(){
-    $('li').removeClass('open show');
-    var cards = [];
-        
+    var erro = 0, win = 0, cards = [];
+
+    setTimeout(function() {
+        $('li').removeClass('open show');    
+    }, 3000);
+            
     $(".card").each(function(i, el) {
         el.addEventListener('click', function(ev){
             displayCard(ev);
             cards.push(el);
             compare();
+            console.log(win, erro);
         });
     });
 
-    $('.score-panel').on('click', '.restart', function(ev){
-        shuffle(ev);    
+    $('.restart').on('click', '.fa-repeat', function(ev){
+        shuffle(cards);    
     })
     
     function shuffle(cards) {
@@ -46,13 +49,14 @@ $( document ).ready(function() {
     function displayCard(evt) {
         $(evt.target).addClass('open show');
     }
+        
     
     function compare() {
-        if(cards.length > 1) {
+        if(cards.length === 2) {
             var prv, cur = null;
             cards.forEach(function(card, i) {
                 cur = card.children[0].className;
-                if( prv !== null ) {
+                if(prv !== null && i === 1) {
                     if( prv === cur ) {
                         match();
                     } else {
@@ -60,10 +64,9 @@ $( document ).ready(function() {
                             function(){
                                 unmatch();
                             }, 500);
-                        ;
                     }
                 }
-                prv = card.children[0].className;
+                prv = cur;
             });
         }
     }
@@ -72,8 +75,11 @@ $( document ).ready(function() {
        cards.forEach(function(card, i) {
            $(card).removeClass('open show');
            $(card).addClass('match');
-       });
+         });
        cards = [];
+       erro = erro+1;
+       win = win+1;
+       console.log('match');
    }
     
     function unmatch() {
@@ -81,8 +87,9 @@ $( document ).ready(function() {
            $(card).removeClass('open show');
        });
        cards = [];
-   }
-  },2000);               
+       erro = erro+1;
+        console.log('unmatch');
+   }             
 });
 
 
