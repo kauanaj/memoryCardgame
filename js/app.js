@@ -24,8 +24,8 @@ $( document ).ready(function() {
             displayCard(ev);
             cards.push(el);
             compare();
-            moves();
-         });
+            score();
+        });
     });
 
     $('.restart').on('click', '.fa-repeat', function(ev){
@@ -35,6 +35,15 @@ $( document ).ready(function() {
     function  moves(){
         $('span').text(move);  
      }
+    
+    function score(){
+        if(move > 12){
+            $('#s1').removeClass('fa-star');
+            $('#s2').removeClass('fa-star');
+        } else if(move > 8 && move <= 12){
+            $('#s1').removeClass('fa-star');
+        } 
+    }
     
     function shuffle(cards) {
         var currentIndex = cards.length, temporaryValue, randomIndex;
@@ -69,7 +78,7 @@ $( document ).ready(function() {
                             function(){
                                 unmatch();
                                 moves();
-                            }, 500);
+                              }, 500);
                     }
                 }
                 prv = cur;
@@ -81,7 +90,6 @@ $( document ).ready(function() {
        cards.forEach(function(card, i) {
            $(card).removeClass('open show');
            $(card).addClass('match');
-           console.log(move);
         });
        cards = [];
        move = move+1;
@@ -91,7 +99,6 @@ $( document ).ready(function() {
     function unmatch() {
        cards.forEach(function(card, i) {
            $(card).removeClass('open show');
-           console.log(move);
        });
        cards = [];
        move = move+1;
