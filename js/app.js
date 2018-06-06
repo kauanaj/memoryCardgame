@@ -25,13 +25,14 @@ $( document ).ready(function() {
             cards.push(el);
             compare();
             score();
+            winner();
         });
     });
 
     $('.restart').on('click', '.fa-repeat', function(ev){
         shuffle(cards);    
     })
-    
+
     function  moves(){
         $('span').text(move);  
      }
@@ -43,6 +44,12 @@ $( document ).ready(function() {
         } else if(move > 8 && move <= 12){
             $('#s1').removeClass('fa-star');
         } 
+    }
+    
+    function winner(){
+        if(win === 8){
+            $('#win').modal('show');
+          }
     }
     
     function shuffle(cards) {
