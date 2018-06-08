@@ -128,13 +128,29 @@ h1 {
     display: inline-block;
     padding: 6px 12px;
     margin-bottom: 0;
-    font-size: 14px;
-    font-weight: 400;
+    font-size: 20px;
     line-height: 1.42857143;
-    text-align: center;
-    white-space: nowrap;
-    vertical-align: middle;
-    background-image: none;
-    border: 1px solid;
+    border: 1px solid white;
+    color: white;
+    background-color: cornflowerblue;
     border-radius: 4px
+}
+
+.modal-title {
+    font-size: 20px;
+    margin: 0;
+}
+
+.timer {
+    font-size: 40px;
+    margin: 0;
+}
+
+.score-stars {
+    font-size: 60px;
+    color: gold;
+}
+
+.modal {
+    text-align: center;
 }

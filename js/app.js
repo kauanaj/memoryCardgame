@@ -50,12 +50,11 @@ $( document ).ready(function() {
                         match();
                         moves();
                       } else {
-                        setTimeout(
-                            function(){
+                            setTimeout(function(){
                                 unmatch();
                                 moves();
-                              }, 500);
-                    }
+                            }, 500);
+                      }
                 }
                 prv = cur;
             });
@@ -91,16 +90,27 @@ $( document ).ready(function() {
     }
     
     function  moves(){
-        $('span').text(move);  
+        $('.moves').text(move);  
      }
 
     function winner(){
         if(win === 8){
             $('#win').modal('show');
-            $('.modal-body').text(timer);
+            $('.timer').text(timer+' Segundos');
+            if(move == 8) {
+                $('.score-stars').append('<i class="fa fa-star"></i>');
+                $('.score-stars').append('<i class="fa fa-star"></i>');
+                $('.score-stars').append('<i class="fa fa-star"></i>');
+            } else if(move > 8 && move <= 12) {
+                $('.score-stars').append('<i class="fa fa-star"></i>');
+                $('.score-stars').append('<i class="fa fa-star"></i>');
+            }else {
+                $('.score-stars').append('<i class="fa fa-star"></i>');
+            }
           }
     }
-        
+    
+    
     function shuffle(cards) {
         var currentIndex = cards.length, temporaryValue, randomIndex;
 
