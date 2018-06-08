@@ -1,150 +1,139 @@
-/*
- * Create a list that holds all of your cards
- */
-
-
-/*
- * Display the cards on the page
- *   - shuffle the list of cards using the provided "shuffle" method below
- *   - loop through each card and create its HTML
- *   - add each card's HTML to the page
- */
-
-// Shuffle function from http://stackoverflow.com/a/2450976
-
 $( document ).ready(function() {
-    var timer = 0, move = 0, win = 0, cards = [];
+	var timer = 0, move = 0, win = 0, cards = [], deck = [], i = 0;
 
-    setTimeout(function() {
-        $('li').removeClass('open show');    
-    }, 3000);
-    
-    var clock = setInterval( function() {
-        if( win >= 8 ) {
-            clearInterval(clock);
-        }
-        timer++;
-    }, 1000 );
-    
-    $(".card").each(function(i, el) {
-        el.addEventListener('click', function(ev){
-            displayCard(ev);
-            cards.push(el);
-            compare();
-            score();
-            winner();
-        });
-    });
-    
-    function displayCard(evt) {
-        $(evt.target).addClass('open show');
-    }
-        
-    function compare() {
-        if(cards.length === 2) {
-            var prv, cur = null;
-            cards.forEach(function(card, i) {
-                cur = card.children[0].className;
-                if(prv !== null && i === 1) {
-                    if( prv === cur ) {
-                        match();
-                        moves();
-                      } else {
-                            setTimeout(function(){
-                                unmatch();
-                                moves();
-                            }, 500);
-                      }
-                }
-                prv = cur;
-            });
-        }
-    }
-  
-    function match() {
-       cards.forEach(function(card, i) {
-           $(card).removeClass('open show');
-           $(card).addClass('match');
-        });
-       cards = [];
-       move = move+1;
-       win = win+1;
-   }
-    
-    function unmatch() {
-       cards.forEach(function(card, i) {
-           $(card).removeClass('open show');
-       });
-       cards = [];
-       move = move+1;
-   }
-   
-    function score(){
-        if(move > 12){
-            $('#s1').removeClass('fa-star');
-            $('#s2').removeClass('fa-star');
-        } else if(move > 8 && move <= 12){
-            $('#s1').removeClass('fa-star');
-        }
-        
-    }
-    
-    function  moves(){
-        $('.moves').text(move);  
-     }
+	// initialize clock
+	var clock = setInterval( function() {
+		if( win >= 8 ) {
+			clearInterval(clock);
+		}
+		timer++;
+	}, 1000 );
 
-    function winner(){
-        if(win === 8){
-            $('#win').modal('show');
-            $('.timer').text(timer+' Segundos');
-            if(move == 8) {
-                $('.score-stars').append('<i class="fa fa-star"></i>');
-                $('.score-stars').append('<i class="fa fa-star"></i>');
-                $('.score-stars').append('<i class="fa fa-star"></i>');
-            } else if(move > 8 && move <= 12) {
-                $('.score-stars').append('<i class="fa fa-star"></i>');
-                $('.score-stars').append('<i class="fa fa-star"></i>');
-            }else {
-                $('.score-stars').append('<i class="fa fa-star"></i>');
-            }
-          }
-    }
-    
-    
-    function shuffle(cards) {
-        var currentIndex = cards.length, temporaryValue, randomIndex;
+	// pop deck
+	$(".card").each(function(i, card) {
+		deck.push(card.children[0].className);
+	});
 
-        while (currentIndex !== 0) {
-            randomIndex = Math.floor(Math.random() * currentIndex);
-            currentIndex -= 1;
-            temporaryValue = cards[currentIndex];
-            cards[currentIndex] = cards[randomIndex];
-            cards[randomIndex] = temporaryValue;
-        }
+	// shuffle
+	deck = shuffle(deck);
+	$(".card").each(function(i, card) {
+		card.children[0].className = deck[i];
+	});
 
-        return cards;
-   }
+	// card click
+	$(".card").each(function(i, el) {
+		el.addEventListener('click', function(ev){
+			displayCard(ev);
+			cards.push(el);
+			compare();
+			score();
+			winner();
+		});
+	});
+
+	// hide cards
+	setTimeout(function() {
+		$('li').removeClass('open show');	
+	}, 3000);
+
+	// restart game
+	$(".restart").each(function(i, el) {
+		el.children[0].addEventListener('click', function() {
+			document.location.reload(true);
+		});
+	});
+
+	function displayCard(evt) {
+		$(evt.target).addClass('open show');
+	}
+
+	function compare() {
+		if(cards.length === 2) {
+			var prv, cur = null;
+			cards.forEach(function(card, i) {
+				cur = card.children[0].className;
+				if(prv !== null && i === 1) {
+					if( prv === cur ) {
+						match();
+						moves();
+					  } else {
+							setTimeout(function(){
+								unmatch();
+								moves();
+							}, 500);
+					  }
+				}
+				prv = cur;
+			});
+		}
+	}
+
+	function match() {
+	   cards.forEach(function(card, i) {
+		   $(card).removeClass('open show');
+		   $(card).addClass('match');
+		});
+	   cards = [];
+	   move = move+1;
+	   win = win+1;
+	}
+
+	function unmatch() {
+	   cards.forEach(function(card, i) {
+		   $(card).removeClass('open show');
+	   });
+	   cards = [];
+	   move = move+1;
+	}
+
+	function score(){
+		if(move > 12){
+			$('#s1').removeClass('fa-star');
+			$('#s2').removeClass('fa-star');
+		} else if(move > 8 && move <= 12){
+			$('#s1').removeClass('fa-star');
+		}
+		
+	}
+
+	function  moves(){
+		$('.moves').text(move);  
+	}
+
+	function winner(){
+		if(win === 8){
+			// handle winner modal
+			var m = $("#win"); 
+			m.modal({
+				show: true
+			});
+			m.on('modal:close', function(ev, modal) {
+				document.location.reload(true);
+			});
+			$('.timer').text(timer+' Segundos');
+			if(move == 8) {
+				$('.score-stars').append('<i class="fa fa-star"></i>');
+				$('.score-stars').append('<i class="fa fa-star"></i>');
+				$('.score-stars').append('<i class="fa fa-star"></i>');
+			} else if(move > 8 && move <= 12) {
+				$('.score-stars').append('<i class="fa fa-star"></i>');
+				$('.score-stars').append('<i class="fa fa-star"></i>');
+			}else {
+				$('.score-stars').append('<i class="fa fa-star"></i>');
+			}
+		  }
+	}
+
+	function shuffle(arr) {
+		var currentIndex = arr.length, temporaryValue, randomIndex;
+		while (currentIndex !== 0) {
+			randomIndex = Math.floor(Math.random() * currentIndex);
+			currentIndex -= 1;
+			temporaryValue = arr[currentIndex];
+			arr[currentIndex] = arr[randomIndex];
+			arr[randomIndex] = temporaryValue;
+		}
+		return arr;
+	}
+
 });
-
-
-/*
-
-cards = [ {} ];
-
-card := {
-    "class": "fa fa-diamond"
-}
-
-doDeck() {
-    document.createElemt
-}
-
- * set up the event listener for a card. If a card is clicked:
- *  - display the card's symbol (put this functionality in another function that you call from this one)
- *  - add the card to a *list* of "open" cards (put this functionality in another function that you call from this one)
- *  - if the list already has another card, check to see if the two cards match
- *    + if the cards do match, lock the cards in the open position (put this functionality in another function that you call from this one)
- *    + if the cards do not match, remove the cards from the list and hide the card's symbol (put this functionality in another function that you call from this one)
- *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
- *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
- */
