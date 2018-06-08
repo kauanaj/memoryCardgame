@@ -13,12 +13,19 @@
 // Shuffle function from http://stackoverflow.com/a/2450976
 
 $( document ).ready(function() {
-    var move = 0, win = 0, cards = [];
+    var timer = 0, move = 0, win = 0, cards = [];
 
     setTimeout(function() {
         $('li').removeClass('open show');    
     }, 3000);
-            
+    
+    var clock = setInterval( function() {
+        if( win >= 8 ) {
+            clearInterval(clock);
+        }
+        timer++;
+    }, 1000 );
+    
     $(".card").each(function(i, el) {
         el.addEventListener('click', function(ev){
             displayCard(ev);
@@ -28,49 +35,11 @@ $( document ).ready(function() {
             winner();
         });
     });
-
-    $('.restart').on('click', '.fa-repeat', function(ev){
-        shuffle(cards);    
-    })
-
-    function  moves(){
-        $('span').text(move);  
-     }
     
-    function score(){
-        if(move > 12){
-            $('#s1').removeClass('fa-star');
-            $('#s2').removeClass('fa-star');
-        } else if(move > 8 && move <= 12){
-            $('#s1').removeClass('fa-star');
-        } 
-    }
-    
-    function winner(){
-        if(win === 8){
-            $('#win').modal('show');
-          }
-    }
-    
-    function shuffle(cards) {
-        var currentIndex = cards.length, temporaryValue, randomIndex;
-
-        while (currentIndex !== 0) {
-            randomIndex = Math.floor(Math.random() * currentIndex);
-            currentIndex -= 1;
-            temporaryValue = cards[currentIndex];
-            cards[currentIndex] = cards[randomIndex];
-            cards[randomIndex] = temporaryValue;
-        }
-
-        return cards;
-    }
-
     function displayCard(evt) {
         $(evt.target).addClass('open show');
     }
         
-    
     function compare() {
         if(cards.length === 2) {
             var prv, cur = null;
@@ -80,7 +49,7 @@ $( document ).ready(function() {
                     if( prv === cur ) {
                         match();
                         moves();
-                    } else {
+                      } else {
                         setTimeout(
                             function(){
                                 unmatch();
@@ -109,7 +78,42 @@ $( document ).ready(function() {
        });
        cards = [];
        move = move+1;
-   }             
+   }
+   
+    function score(){
+        if(move > 12){
+            $('#s1').removeClass('fa-star');
+            $('#s2').removeClass('fa-star');
+        } else if(move > 8 && move <= 12){
+            $('#s1').removeClass('fa-star');
+        }
+        
+    }
+    
+    function  moves(){
+        $('span').text(move);  
+     }
+
+    function winner(){
+        if(win === 8){
+            $('#win').modal('show');
+            $('.modal-body').text(timer);
+          }
+    }
+        
+    function shuffle(cards) {
+        var currentIndex = cards.length, temporaryValue, randomIndex;
+
+        while (currentIndex !== 0) {
+            randomIndex = Math.floor(Math.random() * currentIndex);
+            currentIndex -= 1;
+            temporaryValue = cards[currentIndex];
+            cards[currentIndex] = cards[randomIndex];
+            cards[randomIndex] = temporaryValue;
+        }
+
+        return cards;
+   }
 });
 
 
