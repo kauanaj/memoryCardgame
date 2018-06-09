@@ -35,7 +35,7 @@ $( document ).ready(function() {
 	// hide cards
 	setTimeout(function() {
 		$('li').removeClass('open show');	
-	}, 3000);
+	}, 5000);
 
 	// restart game
 	$(".restart").each(function(i, el) {
@@ -88,10 +88,10 @@ $( document ).ready(function() {
 	}
 
 	function score(){
-		if(move > 12){
+		if(move > 20){
 			$('#s1').removeClass('fa-star');
 			$('#s2').removeClass('fa-star');
-		} else if(move > 8 && move <= 12){
+		} else if(move > 12 && move <= 20){
 			$('#s1').removeClass('fa-star');
 		}
 		
@@ -112,11 +112,11 @@ $( document ).ready(function() {
 				document.location.reload(true);
 			});
 			$('.timer').text(timer+' Segundos');
-			if(move == 8) {
+			if(move == 12) {
 				$('.score-stars').append('<i class="fa fa-star"></i>');
 				$('.score-stars').append('<i class="fa fa-star"></i>');
 				$('.score-stars').append('<i class="fa fa-star"></i>');
-			} else if(move > 8 && move <= 12) {
+			} else if(move > 12 && move <= 20) {
 				$('.score-stars').append('<i class="fa fa-star"></i>');
 				$('.score-stars').append('<i class="fa fa-star"></i>');
 			}else {
