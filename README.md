@@ -14,10 +14,12 @@ Caso queira jogar novamente basta clicar no botão restart para reinicio e embar
 
 ## Dependencias 
 
-Conjunto de ferramentas implementadas ao longo do desenvolvimento.
-
- * jquery version 3.0.0
- * jquery-modal version 0.9.1
+ * https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js
+ * https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js
  * font-awesome version 4.6.1
- * font : coda
+ * https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css
+ * https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css
+ * https://fonts.googleapis.com/css?family=Coda
+ 
+
  
