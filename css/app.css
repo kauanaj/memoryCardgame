@@ -96,6 +96,7 @@ h1 {
     padding: 0;
     display: inline-block;
     margin: 0 5px 0 0;
+    color: gold;
 }
 
 .score-panel .stars li {
@@ -116,6 +117,14 @@ h1 {
 .score-panel .restart {
     float: right;
     cursor: pointer;
+}
+
+.moves {
+    margin-left: 20px;
+}
+
+.time {
+    margin-left: 40px;
 }
 
 .btn-default {

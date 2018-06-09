@@ -6,7 +6,8 @@ $( document ).ready(function() {
 		if( win >= 8 ) {
 			clearInterval(clock);
 		}
-		timer++;
+        $('.time').text(timer);
+        timer++;
 	}, 1000 );
 
 	// pop deck
