@@ -1,10 +1,5 @@
 # Memory Game Project
 
-## Table of Contents
-
-* [Instructions](#instructions)
-* [Contributing](#contributing)
-
 ## Como Jogar
 
 Escolha duas cartas clicando nelas para elas desvirarem.
@@ -12,7 +7,7 @@ Se formarem um par, elas são eliminadas. Caso contrário, elas são viradas nov
 Encontre todos os pares para eliminar todas as cartas do jogo.
 Caso queira jogar novamente basta clicar no botão restart para reinicio e embaralhamento das cartas.
 
-## Dependencias 
+## Dependências 
 
  * https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js
  * https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js
