@@ -24,7 +24,7 @@ $( document ).ready(function() {
 	// card click
 	$(".card").each(function(i, el) {
 		el.addEventListener('click', function(ev){
-			if(el.className !== 'card open show') {
+			if(el.className !== 'card open show' && el.className !== 'card match') {
                 displayCard(ev);
                 cards.push(el);
                 compare();
