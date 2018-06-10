@@ -24,11 +24,13 @@ $( document ).ready(function() {
 	// card click
 	$(".card").each(function(i, el) {
 		el.addEventListener('click', function(ev){
-			displayCard(ev);
-			cards.push(el);
-			compare();
-			score();
-			winner();
+			if(el.className !== 'card open show') {
+                displayCard(ev);
+                cards.push(el);
+                compare();
+                score();
+                winner();
+            }
 		});
 	});
 
